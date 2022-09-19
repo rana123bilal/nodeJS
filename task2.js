@@ -6,7 +6,7 @@ let str = ''
  
 fs.createReadStream(csvFilePath)
   .pipe(parse({ delimiter: ",", from_line: 2}))
-  .on("data", function (row) {
+  .on("data",  (row) => {
       const obj = {
           "book": row[0],
           "author": row[1],
@@ -14,7 +14,7 @@ fs.createReadStream(csvFilePath)
       }
       str += `${JSON.stringify(obj)}\n`
   }) 
-  .on("end", function () {
+  .on("end", () => {
     console.log("done");
     fs.writeFile('./files/text.txt', str, error => {
         if (error) {
